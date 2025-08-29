@@ -25,6 +25,7 @@ getById('card-sec').addEventListener('click',function(e){
         const callBtn = e.target;
     const serviceName=callBtn.parentNode.parentNode.children[1].innerText
     const serviceNumber=callBtn.parentNode.parentNode.children[3].innerText
+    const time=new Date().toLocaleTimeString()
     const coin=getById('coin-count').innerText
     const callFee=20;
     const finalCoin=Number(coin)-callFee
@@ -34,9 +35,15 @@ getById('card-sec').addEventListener('click',function(e){
     const historyDiv = getById('history-id')
     const newHistory = document.createElement("div")
     newHistory.innerHTML =`
-        <div class="bg-slate-200  rounded-xl p-4 mt-3">
-            <h2 class="text-sm font-bold">${serviceName} </h2>
+        <div class="bg-slate-200  rounded-xl p-4 mt-3 flex justify-between items-center">
+            <div>
+                <h2 class="text-sm font-bold">${serviceName} </h2>
             <p>${serviceNumber}</p>
+            </div>
+            <div>
+                <p class="font-semibold text-sm">${time}</p> 
+            </div>
+
         </div>
 
     `
@@ -62,17 +69,24 @@ getById('clear-btn').addEventListener('click',function(){
     historyDiv.innerHTML=""
 })
 
+// copy button
 
-// const callBtns=document.getElementsByClassName("call-btn")
-// for(const callBtn of callBtns){
-//     callBtn.addEventListener('click',function(){
-//     console.log(' call btn clicked')
-// })
-// }
+getById('card-sec').addEventListener('click',function(e){
+    if(e.target.className.includes('copy-btn')){
+        const copyBtn = e.target;
+        const copyNumber=copyBtn.parentNode.parentNode.children[3].innerText
+        navigator.clipboard.writeText(copyNumber)
+        alert('Number copied to clipboard:'+ copyNumber)
+        let copyCount =Number(getById('copy-count').innerText)
+        let=copyCount=copyCount+1;
+        getById('copy-count').innerText=copyCount
 
-// const copyBtns=document.getElementsByClassName("copy-btn")
-// for(const copyBtn of copyBtns){
-//     copyBtn.addEventListener('click',function(){
-//     console.log(' copy btn clicked')
-// })
-// }
+    }
+
+
+})
+
+
+
+
+
