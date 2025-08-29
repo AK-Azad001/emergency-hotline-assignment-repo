@@ -17,21 +17,40 @@ for(const heartIcon of heartIcons){
 
 
 // call button
-let isBlocked=false;
+
 getById('card-sec').addEventListener('click',function(e){
+    if(e.target.className.includes('copy-btn')){
+        const copyBtn = e.target;
+        const copyNumber=copyBtn.parentNode.parentNode.children[3].innerText
+        navigator.clipboard.writeText(copyNumber)
+        alert('Number copied to clipboard:'+ copyNumber)
+        let copyCount =Number(getById('copy-count').innerText)
+        let=copyCount=copyCount+1;
+        getById('copy-count').innerText=copyCount
+
+    }
     
-    if(e.target.className.includes('call-btn')){
-        if (isBlocked){return;}
+    if(e.target.className.includes('call-btn') ){
+        
+            
         const callBtn = e.target;
-    const serviceName=callBtn.parentNode.parentNode.children[1].innerText
+    const serviceName=callBtn.parentNode.parentNode.children[2].innerText
     const serviceNumber=callBtn.parentNode.parentNode.children[3].innerText
-    const time=new Date().toLocaleTimeString()
     const coin=getById('coin-count').innerText
     const callFee=20;
-    const finalCoin=Number(coin)-callFee
+        if(coin<callFee)
+        {
+           alert('Insufficient coin.Please recharge & try later')   
+        return; 
+        }
+        else
+        {
+            const finalCoin=Number(coin)-callFee
+    getById('coin-count').innerText=finalCoin
+    
+      alert(`Calling ${serviceName}:${serviceNumber} `)
 
-    alert(`${serviceName}  \n ${serviceNumber} `)
-
+      const time=new Date().toLocaleTimeString()
     const historyDiv = getById('history-id')
     const newHistory = document.createElement("div")
     newHistory.innerHTML =`
@@ -45,21 +64,13 @@ getById('card-sec').addEventListener('click',function(e){
             </div>
 
         </div>
-
     `
     historyDiv.append(newHistory )
-   
-    getById('coin-count').innerText=finalCoin
-    if(finalCoin < callFee)
-    {
-         
-        alert('Insufficient coin.Please recharge & try later')
-        isBlocked = true;
-        return;
-       
-    }
+
+        }
     
-    }
+    
+    }    
         
 })
 
@@ -71,20 +82,20 @@ getById('clear-btn').addEventListener('click',function(){
 
 // copy button
 
-getById('card-sec').addEventListener('click',function(e){
-    if(e.target.className.includes('copy-btn')){
-        const copyBtn = e.target;
-        const copyNumber=copyBtn.parentNode.parentNode.children[3].innerText
-        navigator.clipboard.writeText(copyNumber)
-        alert('Number copied to clipboard:'+ copyNumber)
-        let copyCount =Number(getById('copy-count').innerText)
-        let=copyCount=copyCount+1;
-        getById('copy-count').innerText=copyCount
+// getById('card-sec').addEventListener('click',function(e){
+//     // if(e.target.className.includes('copy-btn')){
+//     //     const copyBtn = e.target;
+//     //     const copyNumber=copyBtn.parentNode.parentNode.children[3].innerText
+//     //     navigator.clipboard.writeText(copyNumber)
+//     //     alert('Number copied to clipboard:'+ copyNumber)
+//     //     let copyCount =Number(getById('copy-count').innerText)
+//     //     let=copyCount=copyCount+1;
+//     //     getById('copy-count').innerText=copyCount
 
-    }
+//     // }
 
 
-})
+// })
 
 
 
