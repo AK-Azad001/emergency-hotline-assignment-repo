@@ -56,7 +56,11 @@ getById('card-sec').addEventListener('click',function(e){
         
 })
 
-// 
+// clear button
+getById('clear-btn').addEventListener('click',function(){
+    const historyDiv=getById('history-id')
+    historyDiv.innerHTML=""
+})
 
 
 // const callBtns=document.getElementsByClassName("call-btn")
