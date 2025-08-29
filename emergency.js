@@ -1,3 +1,5 @@
+// get by id function
+
 function getById(id){
  const element=document.getElementById(id);
  return element;  
@@ -12,13 +14,17 @@ for(const heartIcon of heartIcons){
     const heartAmount=getById('heart-count').innerText
     const heartTotalAmount=Number(heartAmount) + 1;
     getById('heart-count').innerText=heartTotalAmount;
+    
 })
 }
 
 
-// call button
+// call & copy button
 
 getById('card-sec').addEventListener('click',function(e){
+
+    // copy button
+
     if(e.target.className.includes('copy-btn')){
         const copyBtn = e.target;
         const copyNumber=copyBtn.parentNode.parentNode.children[3].innerText
@@ -29,12 +35,12 @@ getById('card-sec').addEventListener('click',function(e){
         getById('copy-count').innerText=copyCount
 
     }
+    // call button
     
     if(e.target.className.includes('call-btn') ){
         
-            
         const callBtn = e.target;
-    const serviceName=callBtn.parentNode.parentNode.children[2].innerText
+    const serviceName=callBtn.parentNode.parentNode.children[1].innerText
     const serviceNumber=callBtn.parentNode.parentNode.children[3].innerText
     const coin=getById('coin-count').innerText
     const callFee=20;
@@ -45,15 +51,15 @@ getById('card-sec').addEventListener('click',function(e){
         }
         else
         {
-            const finalCoin=Number(coin)-callFee
-    getById('coin-count').innerText=finalCoin
+        const finalCoin=Number(coin)-callFee
+        getById('coin-count').innerText=finalCoin
     
-      alert(`Calling ${serviceName}:${serviceNumber} `)
+         alert(`Calling ${serviceName}:${serviceNumber} `)
 
-      const time=new Date().toLocaleTimeString()
-    const historyDiv = getById('history-id')
-    const newHistory = document.createElement("div")
-    newHistory.innerHTML =`
+        const time=new Date().toLocaleTimeString()
+        const historyDiv = getById('history-id')
+        const newHistory = document.createElement("div")
+        newHistory.innerHTML =`
         <div class="bg-slate-200  rounded-xl p-4 mt-3 flex justify-between items-center">
             <div>
                 <h2 class="text-sm font-bold">${serviceName} </h2>
@@ -63,9 +69,8 @@ getById('card-sec').addEventListener('click',function(e){
                 <p class="font-semibold text-sm">${time}</p> 
             </div>
 
-        </div>
-    `
-    historyDiv.append(newHistory )
+        </div> `
+        historyDiv.append(newHistory )
 
         }
     
@@ -75,10 +80,13 @@ getById('card-sec').addEventListener('click',function(e){
 })
 
 // clear button
-getById('clear-btn').addEventListener('click',function(){
-    const historyDiv=getById('history-id')
-    historyDiv.innerHTML=""
+    getById('clear-btn').addEventListener('click',function(){
+     const historyDiv=getById('history-id')
+     historyDiv.innerHTML="";
+
 })
+
+
 
 // copy button
 
